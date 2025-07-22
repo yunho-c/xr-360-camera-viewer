@@ -1081,3 +1081,157 @@
 
   Is there anything else I can help you with?
 ```
+
+
+```
+╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│  > @References/xr-360-camera-streamer/python/examples/360_server_reprojection.py works fine when using web browser client                                     │
+│    (@References/xr-360-camera-streamer/python/examples/360_server_reprojection.html), but doesn't work when using the Unity client                            │
+│    (@Unity/Assets/Scripts/WebRTCReprojectionClient.cs). The `pc.setLocalDescription()` method in line 172 of                                                  │
+│    @References/xr-360-camera-streamer/python/src/xr_360_camera_streamer/streaming/webrtc_server.py fails. I ruled out potential errors (like the source video │
+│     not being present), and made a notable observation that, when it works correctly for the browser, the `answer` object contains two media channels (a      │
+│    video and an application), but for Unity, there's only one media channel (just the application). I will provide you the answers (parsed into               │
+│    sdp.SessionDescription now): \nUnity (doesn't work):\ndescription                                                                                          │
+│    <aiortc.sdp.SessionDescription object at 0x14af37b10>                                                                                                      │
+│    special variables                                                                                                                                          │
+│    function variables                                                                                                                                         │
+│    group = [GroupDescription(semantic='BUNDLE', items=['0'])]                                                                                                 │
+│    host = None                                                                                                                                                │
+│    media = [<aiortc.sdp.MediaDescription object at 0x14af37c50>]                                                                                              │
+│    special variables                                                                                                                                          │
+│    function variables                                                                                                                                         │
+│    0 = <aiortc.sdp.MediaDescription object at 0x14af37c50>                                                                                                    │
+│    special variables                                                                                                                                          │
+│    direction = None                                                                                                                                           │
+│    dtls = RTCDtlsParameters(fingerprints=[RTCDtlsFingerprint(algorithm='sha-256',                                                                             │
+│    value='53:27:FB:49:82:A6:59:0C:BF:7F:DB:97:4C:9D:0C:5A:BF:2A:E5:65:E7:AA:FB:D5:AE:15:3D:B4:51:B8:81:12'), RTCDtlsFingerprint(algorithm='sha-384',          │
+│    value='F8:3F:3B:43:75:23:27:C2:DF:4B:44:D1:04:F6:B8:7A:81:7C:F0:42:28:4F:76:A5:EE:F7:A4:76:72:27:08:F2:4B:3E:7C:07:C9:57:67:11:72:B0:67:17:26:C8:B8:11'),  │
+│    RTCDtlsFingerprint(algorithm='sha-512', value='82:BE:49:7B:22:56:F7:1E:28:6C:5B:B0:F4:03:FF:B7:6E:68:41:7D:AA:9E:9C:21:82:C6:60:E7:BE:13:39:6E:D3:06:14:C1 │
+│    :05:FF:A7:61:A2:7F:B9:A2:D6:DB:2C:A8:95:F1:F3:87:1D:33:46:B1:CB:6D:8E:9C:26:C2:A3:75')], role='client')                                                    │
+│    fmt = ['webrtc-datachannel']                                                                                                                               │
+│    host = '0.0.0.0'                                                                                                                                           │
+│    ice = RTCIceParameters(usernameFragment='emIA', password='Jrd4RSrYbL9ryjaNvtCf68', iceLite=False)                                                          │
+│    ice_candidates = []                                                                                                                                        │
+│    ice_candidates_complete = False                                                                                                                            │
+│    ice_options = None                                                                                                                                         │
+│    kind = 'application'                                                                                                                                       │
+│    msid = None                                                                                                                                                │
+│    port = 9                                                                                                                                                   │
+│    profile = 'UDP/DTLS/SCTP'                                                                                                                                  │
+│    rtcp_host = None                                                                                                                                           │
+│    rtcp_mux = False                                                                                                                                           │
+│    rtcp_port = None                                                                                                                                           │
+│    rtp = RTCRtpParameters(codecs=[], headerExtensions=[], muxId='0', rtcp=RTCRtcpParameters(cname=None, mux=False, ssrc=None))                                │
+│    sctpCapabilities = RTCSctpCapabilities(maxMessageSize=65536)                                                                                               │
+│    sctp_port = 5000                                                                                                                                           │
+│    sctpmap = {}                                                                                                                                               │
+│    ssrc = []                                                                                                                                                  │
+│    ssrc_group = []                                                                                                                                            │
+│    len() = 1                                                                                                                                                  │
+│    msid_semantic = [GroupDescription(semantic='WMS', items=['*'])]                                                                                            │
+│    name = '-'                                                                                                                                                 │
+│    origin = '- 3962190583 3962190583 IN IP4 0.0.0.0'                                                                                                          │
+│    time = '0 0'                                                                                                                                               │
+│    type = None                                                                                                                                                │
+│    version = 0\nBrowser (works):\ndescription                                                                                                                 │
+│    <aiortc.sdp.SessionDescription object at 0x16c52d310>                                                                                                      │
+│    special variables                                                                                                                                          │
+│    function variables                                                                                                                                         │
+│    group = [GroupDescription(semantic='BUNDLE', items=['0', '1'])]                                                                                            │
+│    special variables                                                                                                                                          │
+│    function variables                                                                                                                                         │
+│    0 = GroupDescription(semantic='BUNDLE', items=['0', '1'])                                                                                                  │
+│    len() = 1                                                                                                                                                  │
+│    host = None                                                                                                                                                │
+│    media = [<aiortc.sdp.MediaDescription object at 0x16c5350f0>, <aiortc.sdp.MediaDescription object at 0x16c317e30>]                                         │
+│    special variables                                                                                                                                          │
+│    function variables                                                                                                                                         │
+│    0 = <aiortc.sdp.MediaDescription object at 0x16c5350f0>                                                                                                    │
+│    special variables                                                                                                                                          │
+│    direction = 'sendonly'                                                                                                                                     │
+│    dtls = RTCDtlsParameters(fingerprints=[RTCDtlsFingerprint(algorithm='sha-256',                                                                             │
+│    value='0B:C0:95:94:CC:B7:E4:87:C4:8D:0A:FF:8A:D0:13:C1:6E:A2:92:14:90:2A:95:26:6C:53:8E:B9:47:9F:A7:06'), RTCDtlsFingerprint(algorithm='sha-384',          │
+│    value='A7:39:45:6C:30:7A:FC:53:66:B0:47:D3:4C:89:1D:A2:7C:E5:1F:E0:52:09:5F:2E:49:B1:56:2B:B9:38:AE:85:13:CB:81:DC:28:21:04:A9:42:62:51:48:41:C8:F1:97'),  │
+│    RTCDtlsFingerprint(algorithm='sha-512', value='AF:58:D1:0F:67:B5:EB:42:88:95:68:11:12:EF:97:06:A7:01:12:0C:EC:74:AE:7F:5F:D8:BF:D5:A4:A9:B1:53:D9:FC:CF:48 │
+│    :74:58:2A:7F:6F:12:33:2A:3B:E8:CC:FB:8C:B2:1F:75:AC:84:22:42:65:07:DC:9E:67:8A:F9:85')], role='client')                                                    │
+│    fmt = [120, 124, 126, 127, 105, 106]                                                                                                                       │
+│    host = '0.0.0.0'                                                                                                                                           │
+│    ice = RTCIceParameters(usernameFragment='BwEN', password='yJHWIpRr2qhLgWj8IXWXIF', iceLite=False)                                                          │
+│    ice_candidates = []                                                                                                                                        │
+│    ice_candidates_complete = False                                                                                                                            │
+│    ice_options = None                                                                                                                                         │
+│    kind = 'video'                                                                                                                                             │
+│    msid = '692882a2-c437-4041-97ff-46a5a735e2e8 cc36010c-deed-4738-9e18-a7b04029aa03'                                                                         │
+│    port = 9                                                                                                                                                   │
+│    profile = 'UDP/TLS/RTP/SAVPF'                                                                                                                              │
+│    rtcp_host = '0.0.0.0'                                                                                                                                      │
+│    rtcp_mux = True                                                                                                                                            │
+│    rtcp_port = 9                                                                                                                                              │
+│    rtp = RTCRtpParameters(codecs=[RTCRtpCodecParameters(mimeType='video/VP8', clockRate=90000, channels=None, payloadType=120,                                │
+│    rtcpFeedback=[RTCRtcpFeedback(type='nack', parameter=None), RTCRtcpFeedback(type='nack', parameter='pli'), RTCRtcpFeedback(type='goog-remb',               │
+│    parameter=None)], parameters={}), RTCRtpCodecParameters(mimeType='video/rtx', clockRate=90000, channels=None, payloadType=124, rtcpFeedback=[],            │
+│    parameters={'apt': 120}), RTCRtpCodecParameters(mimeType='video/H264', clockRate=90000, channels=None, payloadType=126,                                    │
+│    rtcpFeedback=[RTCRtcpFeedback(type='nack', parameter=None), RTCRtcpFeedback(type='nack', parameter='pli'), RTCRtcpFeedback(type='goog-remb',               │
+│    parameter=None)], parameters={'level-asymmetry-allowed': '1', 'packetization-mode': '1', 'profile-level-id': '42e01f'}),                                   │
+│    RTCRtpCodecParameters(mimeType='video/rtx', clockRate=90000, channels=None, payloadType=127, rtcpFeedback=[], parameters={'apt': 126}),                    │
+│    RTCRtpCodecParameters(mimeType='video/H264', clockRate=90000, channels=None, payloadType=105, rtcpFeedb...                                                 │
+│    sctpCapabilities = None                                                                                                                                    │
+│    sctp_port = None                                                                                                                                           │
+│    sctpmap = {}                                                                                                                                               │
+│    ssrc = [SsrcDescription(ssrc=2600950611, cname='f0d01b80-a318-46c1-8d76-f1f1ffde0772', msid=None, mslabel=None, label=None),                               │
+│    SsrcDescription(ssrc=2505926521, cname='f0d01b80-a318-46c1-8d76-f1f1ffde0772', msid=None, mslabel=None, label=None)]                                       │
+│    ssrc_group = [GroupDescription(semantic='FID', items=[2600950611, 2505926521])]                                                                            │
+│    1 = <aiortc.sdp.MediaDescription object at 0x16c317e30>                                                                                                    │
+│    special variables                                                                                                                                          │
+│    direction = None                                                                                                                                           │
+│    dtls = RTCDtlsParameters(fingerprints=[RTCDtlsFingerprint(algorithm='sha-256',                                                                             │
+│    value='0B:C0:95:94:CC:B7:E4:87:C4:8D:0A:FF:8A:D0:13:C1:6E:A2:92:14:90:2A:95:26:6C:53:8E:B9:47:9F:A7:06'), RTCDtlsFingerprint(algorithm='sha-384',          │
+│    value='A7:39:45:6C:30:7A:FC:53:66:B0:47:D3:4C:89:1D:A2:7C:E5:1F:E0:52:09:5F:2E:49:B1:56:2B:B9:38:AE:85:13:CB:81:DC:28:21:04:A9:42:62:51:48:41:C8:F1:97'),  │
+│    RTCDtlsFingerprint(algorithm='sha-512', value='AF:58:D1:0F:67:B5:EB:42:88:95:68:11:12:EF:97:06:A7:01:12:0C:EC:74:AE:7F:5F:D8:BF:D5:A4:A9:B1:53:D9:FC:CF:48 │
+│    :74:58:2A:7F:6F:12:33:2A:3B:E8:CC:FB:8C:B2:1F:75:AC:84:22:42:65:07:DC:9E:67:8A:F9:85')], role='client')                                                    │
+│    fmt = ['webrtc-datachannel']                                                                                                                               │
+│    host = '0.0.0.0'                                                                                                                                           │
+│    ice = RTCIceParameters(usernameFragment='BwEN', password='yJHWIpRr2qhLgWj8IXWXIF', iceLite=False)                                                          │
+│    ice_candidates = []                                                                                                                                        │
+│    ice_candidates_complete = False                                                                                                                            │
+│    ice_options = None                                                                                                                                         │
+│    kind = 'application'                                                                                                                                       │
+│    msid = None                                                                                                                                                │
+│    port = 9                                                                                                                                                   │
+│    profile = 'UDP/DTLS/SCTP'                                                                                                                                  │
+│    rtcp_host = None                                                                                                                                           │
+│    rtcp_mux = False                                                                                                                                           │
+│    rtcp_port = None                                                                                                                                           │
+│    rtp = RTCRtpParameters(codecs=[], headerExtensions=[], muxId='1', rtcp=RTCRtcpParameters(cname=None, mux=False, ssrc=None))                                │
+│    sctpCapabilities = RTCSctpCapabilities(maxMessageSize=65536)                                                                                               │
+│    sctp_port = 5000                                                                                                                                           │
+│    sctpmap = {}                                                                                                                                               │
+│    ssrc = []                                                                                                                                                  │
+│    ssrc_group = []                                                                                                                                            │
+│    len() = 2                                                                                                                                                  │
+│    msid_semantic = [GroupDescription(semantic='WMS', items=['*'])]                                                                                            │
+│    name = '-'                                                                                                                                                 │
+│    origin = '- 3962189471 3962189471 IN IP4 0.0.0.0'                                                                                                          │
+│    time = '0 0'                                                                                                                                               │
+│    type = None                                                                                                                                                │
+│    version = 0                                                                                                                                                │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+```
+✦ Based on your detailed analysis, the issue stems from the Unity client not requesting a video stream in its SDP offer, while the server unconditionally adds a video track. This leads to an
+  inconsistent state in aiortc that causes pc.setLocalDescription(answer) to fail.
+
+  To resolve this, I will modify References/xr-360-camera-streamer/python/src/xr_360_camera_streamer/streaming/webrtc_server.py to conditionally add the video track only if the client's offer
+  indicates it wants to receive video.
+
+  Here is the plan:
+   1. Read the content of webrtc_server.py.
+   2. In the _create_offer_handler method, I will move the video track creation logic.
+   3. The new logic will first set the remote description from the client's offer.
+   4. Then, it will parse the offer to check for a video media section.
+   5. The video track will only be added if the client has requested video.
+   6. Finally, it will create and set the local description as before.
+
+  This will make the server robust to clients that do not wish to receive video, resolving the issue with the Unity client. I will now proceed with reading the file.
+```

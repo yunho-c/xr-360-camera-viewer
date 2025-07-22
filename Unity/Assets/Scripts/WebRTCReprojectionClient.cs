@@ -30,6 +30,10 @@ public class WebRTCReprojectionClient : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TMP_Text statusText;
 
+    [Header("WebRTC Settings")]
+    [Tooltip("Enable to receive video stream")]
+    public bool receiveVideo = true;
+
     private RTCPeerConnection pc;
     private RTCDataChannel controlChannel;
 
@@ -50,6 +54,13 @@ public class WebRTCReprojectionClient : MonoBehaviour
     private IEnumerator StartWebRTC()
     {
         CreatePeerConnection();
+
+        // Add video transceiver if video is enabled
+        if (receiveVideo)
+        {
+            var videoTransceiver = pc.AddTransceiver(TrackKind.Video);
+            videoTransceiver.Direction = RTCRtpTransceiverDirection.RecvOnly;
+        }
 
         // Create data channel
         controlChannel = pc.CreateDataChannel("control");
