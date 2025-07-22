@@ -1,0 +1,3 @@
+[submodule "Unity/References/xr-360-camera-streamer"]
+	path = Unity/References/xr-360-camera-streamer
+	url = https://github.com/yunho-c/xr-360-camera-streamer
